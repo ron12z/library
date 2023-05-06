@@ -50,11 +50,15 @@ table {
 
 
 .addBtn {
-    background: green;
+    background: rgb(198, 238, 198);
     border-radius: 50%;
-    padding: 1rem;
     width: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.addBtn svg {
+	color: rgb(0, 202, 0);
+	scale: 0.5;
 }
