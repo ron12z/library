@@ -1,40 +1,10 @@
-/* Resets */
+@import url("https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lilita+One&display=swap");
 
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol,
-ul {
-	list-style: none;
-}
-blockquote,
-q {
-	quotes: none;
-}
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-	content: "";
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
+/* 
+font-family: 'Gentium Book Plus', serif;
+font-family: 'Libre Baskerville', serif;
+font-family: 'Lilita One', cursive;
+ */
 
 *,
 *::before,
@@ -42,23 +12,114 @@ table {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
 }
 
+:root {
+	--ff-title: "Gentium Book Plus", serif;
+	--ff-main: "Libre Baskerville", serif;
+}
+
+/* Page Layout */
+body {
+	min-height: 100vh;
+	display: grid;
+	grid-template-rows: minmax(3rem, 7rem) 1fr 3rem;
+	font-family: var(--ff-title);
+}
+
+header {
+	background: lightblue;
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	font-size: 2rem;
+	padding: 1rem;
+
+	& img {
+		width: 5rem;
+		height: 5rem;
+	}
+}
+
+/* Main content Layout */
+main {
+	background: rgb(255, 183, 183);
+	display: flex;
+	flex-direction: column;
+	position: relative;
+
+	& .book-cards-container {
+		flex: 1;
+	}
+
+	& .main-title {
+		padding-left: 1rem;
+	}
+}
+
+.book-cards-container {
+	display: grid;
+	padding: 1rem;
+	gap: 2rem;
+	grid-template-rows: repeat(auto-fill, minmax(10rem, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+}
+
+.card {
+	display: grid;
+	grid-template-rows: 5fr 1fr;
+	border: 1px solid black;
+
+	& .book-title {
+		text-align: center;
+		background: whitesmoke;
+	}
+}
+
+.card-controls {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+
+	& .read-status,
+	.removeBtn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-weight: bold;
+	}
+
+	& .read-status {
+		background: rgb(198, 238, 198);
+	}
+
+	& .removeBtn {
+		background: orangered;
+	}
+}
 
 .addBtn {
-    background: rgb(198, 238, 198);
-    border-radius: 50%;
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	background: rgb(198, 238, 198);
+	border-radius: 50%;
+	width: fit-content;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	right: 4rem;
+	bottom: 4rem;
+	padding: 0.5rem;
+
+	& img {
+		width: 3rem;
+	}
 }
 
-.addBtn svg {
-	color: rgb(0, 202, 0);
-	scale: 0.5;
+/* Footer */
+footer {
+	background: lightslategray;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 700;
+	font-size: 1.4rem;
 }
