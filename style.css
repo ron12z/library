@@ -1,7 +1,5 @@
 /* Resets */
 
-/* Resets */
-
 article,
 aside,
 details,
@@ -48,4 +46,15 @@ table {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+}
+
+
+.addBtn {
+    background: green;
+    border-radius: 50%;
+    padding: 1rem;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
