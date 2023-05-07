@@ -16,19 +16,24 @@ const readingList = document.querySelector('.book-cards-container');
 // DOM Methods
 const toggleReadStatus = function(e) {
 	const target = e.target.closest(".read-status");
+
 	if(target) {
+		const bookTitle = target.parentElement.parentElement.querySelector('.book-title').textContent;
+		const thisBook = myLibrary.findIndex(book => book.title === bookTitle);
 
 		if (target.querySelector('p').textContent == 'READ') {
 			target.parentElement.parentElement.classList.remove('unread');
 			target.parentElement.parentElement.classList.add('read');
 			target.querySelector('p').textContent = 'UNREAD';
+			thisBook.isRead = 'true'
+			
 		} else if (target.querySelector('p').textContent == 'UNREAD') {
 			target.parentElement.parentElement.classList.remove('read');
 			target.parentElement.parentElement.classList.add('unread')
 			target.querySelector('p').textContent = 'READ';
+			thisBook.isRead = 'false'
 			}
 	}
-	return
 }
 
 
@@ -101,3 +106,10 @@ const refreshLibrary = function() {
 // Event listeners
 readingList.addEventListener('click', toggleReadStatus);
 readingList.addEventListener('click', removeBook);
+
+
+addBookToLibrary('Book 1', 'Author1', 123, true);
+addBookToLibrary('Book 2', 'Author1', 123, true);
+addBookToLibrary('Book 3', 'Author1', 123, true);
+addBookToLibrary('Book 4', 'Author1', 123, 'true');
+addBookToLibrary('Book 5', 'Author1', 123, 'true');
