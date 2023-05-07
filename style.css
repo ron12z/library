@@ -17,22 +17,51 @@ font-family: 'Lilita One', cursive;
 :root {
 	--ff-title: "Gentium Book Plus", serif;
 	--ff-main: "Libre Baskerville", serif;
+	--bg-main: linear-gradient(to left, rgb(97, 190, 221), rgb(139, 139, 212));
+	--bg-read: linear-gradient(300deg, lightgreen, green);
+	--bg-unread: linear-gradient(300deg, lightpink, red);
 }
+
+/* Animation */
+@keyframes append-animate {
+	from {
+		transform: scale(0);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;	
+	}
+}
+
+.notransition {
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-o-transition: none !important;
+	transition: none !important;
+  }
+
 
 /* Page Layout */
 body {
 	min-height: 100vh;
 	display: grid;
-	grid-template-rows: minmax(3rem, 7rem) 1fr 3rem;
+	grid-template-rows: auto 1fr 3rem;
 	font-family: var(--ff-title);
 }
 
 header {
 	background: lightblue;
+	display: grid;
+	gap: 2rem;
+	grid-template-columns: 1fr 1fr;
+}
+
+.logo {
 	display: flex;
 	align-items: center;
 	gap: 2rem;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	padding: 1rem;
 
 	& img {
@@ -41,9 +70,32 @@ header {
 	}
 }
 
+.guide {
+	display: flex;
+	gap: 4rem;
+	justify-content: flex-start;
+	align-items: center;
+
+	& > div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	& .sample {
+		height: 3rem;
+		width: 3rem;
+		border-radius: 1rem;
+	}
+}
+
+
+
+
 /* Main content Layout */
 main {
-	background: rgb(255, 183, 183);
+	background: var(--bg-main);
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -53,7 +105,8 @@ main {
 	}
 
 	& .main-title {
-		padding-left: 1rem;
+		padding: 1rem 0 0 1rem;
+		font-size: 1.3rem;
 	}
 }
 
@@ -63,17 +116,37 @@ main {
 	gap: 2rem;
 	grid-template-rows: repeat(auto-fill, minmax(10rem, 1fr));
 	grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+	
 }
+
 
 .card {
 	display: grid;
 	grid-template-rows: 5fr 1fr;
 	border: 1px solid black;
+	border-radius: 1rem;
+	animation: append-animate .2s ease;
+	
 
 	& .book-title {
+		background: wheat;
+		padding-block: 0.5rem;
 		text-align: center;
-		background: whitesmoke;
+		border-radius: 1rem 1rem 0 0;
 	}
+}
+
+.card-info p {
+	padding-left: 1rem;
+
+	&:first-of-type {
+		padding-top: 1rem;
+	}
+	
+	&:last-child {
+		padding-bottom: 1rem;
+	}
+
 }
 
 .card-controls {
@@ -90,12 +163,27 @@ main {
 
 	& .read-status {
 		background: rgb(198, 238, 198);
+		border-bottom-left-radius: 1rem;
 	}
 
 	& .removeBtn {
 		background: orangered;
+		border-bottom-right-radius: 1rem;
 	}
 }
+
+
+/* Utility Classes */
+
+.read {
+	background: var(--bg-read)
+}
+
+.unread {
+	background: var(--bg-unread)
+}
+
+
 
 .addBtn {
 	background: rgb(198, 238, 198);
