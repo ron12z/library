@@ -80,8 +80,8 @@ const displayBook = function(Book) {
 	`
 	<div class="card-info">
 		<h3 class="book-title">${Book.title}</h3>
-		<p class="book-author">${Book.author}</p><br>
-		<p class="pages">${Book.pages}</p>
+		<p class="book-author">📝 ${Book.author}</p><br>
+		<p class="pages">📖 ${Book.pages}</p>
 	</div>
 	<div class="card-controls">
 		<div class="read-status">
