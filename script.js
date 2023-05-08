@@ -10,48 +10,52 @@ function Book(title, author, pages, isRead) {
 }
 
 // DOM Elements
-const readingList = document.querySelector('.book-cards-container'); 
-
+const readingList = document.querySelector(".book-cards-container");
+const addBtn = document.querySelector(".addBtn");
+const submitBtn = document.querySelector(".submit");
+const mask = document.querySelector(".mask");
 
 // DOM Methods
-const toggleReadStatus = function(e) {
+const toggleReadStatus = function (e) {
 	const target = e.target.closest(".read-status");
 
-	if(target) {
-		const bookTitle = target.parentElement.parentElement.querySelector('.book-title').textContent;
-		const bookIndex = myLibrary.findIndex(book => book.title === bookTitle);
+	if (target) {
+		const bookTitle =
+			target.parentElement.parentElement.querySelector(
+				".book-title"
+			).textContent;
+		const bookIndex = myLibrary.findIndex((book) => book.title === bookTitle);
 		const thisBook = myLibrary[bookIndex];
 
-		if (target.querySelector('p').textContent == 'READ') {
-			target.parentElement.parentElement.classList.remove('unread');
-			target.parentElement.parentElement.classList.add('read');
-			target.querySelector('p').textContent = 'UNREAD';
-			thisBook.isRead = 'true'
-			
-			
-		} else if (target.querySelector('p').textContent == 'UNREAD') {
-			target.parentElement.parentElement.classList.remove('read');
-			target.parentElement.parentElement.classList.add('unread')
-			target.querySelector('p').textContent = 'READ';
-			thisBook.isRead = 'false'
-			}
+		if (target.querySelector("p").textContent == "READ") {
+			target.parentElement.parentElement.classList.remove("unread");
+			target.parentElement.parentElement.classList.add("read");
+			target.querySelector("p").textContent = "UNREAD";
+			thisBook.isRead = "true";
+		} else if (target.querySelector("p").textContent == "UNREAD") {
+			target.parentElement.parentElement.classList.remove("read");
+			target.parentElement.parentElement.classList.add("unread");
+			target.querySelector("p").textContent = "READ";
+			thisBook.isRead = "false";
+		}
 	}
-}
+};
 
-
-const removeBook = function(e) {
+const removeBook = function (e) {
 	const target = e.target.closest(".removeBtn");
-	
+
 	if (target) {
-			const bookTitle = target.parentElement.parentElement.querySelector('.book-title').textContent;
-			myLibrary.splice(myLibrary.findIndex(book => book.title === bookTitle),1);
-			refreshLibrary();
+		const bookTitle =
+			target.parentElement.parentElement.querySelector(
+				".book-title"
+			).textContent;
+		myLibrary.splice(
+			myLibrary.findIndex((book) => book.title === bookTitle),
+			1
+		);
+		refreshLibrary();
 	}
-}
-
-
-
-
+};
 
 // Create books then add to library
 const addBookToLibrary = function (title, author, pages, isRead) {
@@ -65,19 +69,16 @@ const addBookToLibrary = function (title, author, pages, isRead) {
 	displayBook(newBook);
 };
 
-
-
 // Adding book to display
-const displayBook = function(Book) {
-	const readClass = Book.isRead == 'true' ? 'read' : 'unread';
-	const buttonContent = Book.isRead == 'true' ? 'UNREAD' : 'READ';
+const displayBook = function (Book) {
+	const readClass = Book.isRead == "true" ? "read" : "unread";
+	const buttonContent = Book.isRead == "true" ? "UNREAD" : "READ";
 
-	const newBook = document.createElement('div');
-	newBook.classList.add('card');
-	newBook.classList.add(`${readClass}`)
+	const newBook = document.createElement("div");
+	newBook.classList.add("card");
+	newBook.classList.add(`${readClass}`);
 
-	newBook.innerHTML = 
-	`
+	newBook.innerHTML = `
 	<div class="card-info">
 		<h3 class="book-title">${Book.title}</h3>
 		<p class="book-author">📝 ${Book.author}</p><br>
@@ -91,27 +92,44 @@ const displayBook = function(Book) {
 			<p>REMOVE</p>
 		</div>
 	</div>
-	`
+	`;
 
 	readingList.append(newBook);
-}
+};
+
+const openModal = function (e) {
+	if (!e.target.parentElement.classList.contains("active")) {
+		e.target.parentElement.classList.toggle("active");
+		mask.style.visibility = "visible";
+	} else {
+		e.target.parentElement.classList.toggle("active");
+		mask.style.visibility = "hidden";
+	}
+};
+
+const submitForm = function (e) {
+	e.preventDefault();
+	const title = bookTitle.value;
+	const author = bookAuthor.value;
+	const pages = bookPages.value;
+	const isRead = readStatus.checked ? "true" : "false";
+
+	addBookToLibrary(title, author, pages, isRead);
+	document.querySelector("form").reset();
+	addBtn.classList.remove("active");
+	mask.style.visibility = "hidden";
+};
 
 // Clears all then renders updated library
-const refreshLibrary = function() {
+const refreshLibrary = function () {
 	readingList.innerHTML = ``;
-	myLibrary.forEach(book => {
-		displayBook(book)
+	myLibrary.forEach((book) => {
+		displayBook(book);
 	});
-}
-
+};
 
 // Event listeners
-readingList.addEventListener('click', toggleReadStatus);
-readingList.addEventListener('click', removeBook);
-
-
-addBookToLibrary('Book 1', 'Author1', 123, 'true');
-addBookToLibrary('Book 2', 'Author1', 123, 'true');
-addBookToLibrary('Book 3', 'Author1', 123, 'true');
-addBookToLibrary('Book 4', 'Author1', 123, 'true');
-addBookToLibrary('Book 5', 'Author1', 123, 'true');
+readingList.addEventListener("click", toggleReadStatus);
+readingList.addEventListener("click", removeBook);
+addBtn.addEventListener("click", openModal);
+submitBtn.addEventListener("click", submitForm);
