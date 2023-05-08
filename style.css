@@ -190,6 +190,20 @@ main {
 	background: var(--bg-unread);
 }
 
+
+
+/* Footer */
+footer {
+	background: lightslategray;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 700;
+	font-size: 1.4rem;
+}
+
+
+/* Add Button */
 .addBtn {
 	background: rgb(198, 238, 198);
 	border-radius: 50%;
@@ -217,17 +231,15 @@ main {
 	scale: 1.2;
 }
 
-/* Footer */
-footer {
-	background: lightslategray;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-weight: 700;
-	font-size: 1.4rem;
-}
 
 /* PopUp Form */
+.mask {
+	visibility: hidden;
+	position: absolute;
+	height: 100vh;
+	width: 100vw;
+	background-color: rgba(0, 0, 0, 0.548);
+}
 
 .popUp {
 	position: absolute;
@@ -295,10 +307,3 @@ input::-webkit-inner-spin-button {
 	gap: 1rem;
 }
 
-.mask {
-	visibility: hidden;
-	position: absolute;
-	height: 100vh;
-	width: 100vw;
-	background-color: rgba(0, 0, 0, 0.548);
-}

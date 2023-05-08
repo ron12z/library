@@ -1,6 +1,12 @@
 // Initial library
 let myLibrary = [];
 
+// DOM Elements
+const readingList = document.querySelector(".book-cards-container");
+const addBtn = document.querySelector(".addBtn");
+const submitBtn = document.querySelector(".submit");
+const mask = document.querySelector(".mask");
+
 // Book constructor
 function Book(title, author, pages, isRead) {
 	this.title = title;
@@ -9,36 +15,14 @@ function Book(title, author, pages, isRead) {
 	this.isRead = isRead;
 }
 
-// DOM Elements
-const readingList = document.querySelector(".book-cards-container");
-const addBtn = document.querySelector(".addBtn");
-const submitBtn = document.querySelector(".submit");
-const mask = document.querySelector(".mask");
+
 
 // DOM Methods
-const toggleReadStatus = function (e) {
-	const target = e.target.closest(".read-status");
-
-	if (target) {
-		const bookTitle =
-			target.parentElement.parentElement.querySelector(
-				".book-title"
-			).textContent;
-		const bookIndex = myLibrary.findIndex((book) => book.title === bookTitle);
-		const thisBook = myLibrary[bookIndex];
-
-		if (target.querySelector("p").textContent == "READ") {
-			target.parentElement.parentElement.classList.remove("unread");
-			target.parentElement.parentElement.classList.add("read");
-			target.querySelector("p").textContent = "UNREAD";
-			thisBook.isRead = "true";
-		} else if (target.querySelector("p").textContent == "UNREAD") {
-			target.parentElement.parentElement.classList.remove("read");
-			target.parentElement.parentElement.classList.add("unread");
-			target.querySelector("p").textContent = "READ";
-			thisBook.isRead = "false";
-		}
-	}
+// Create new book, add to library, display (add to DOM)
+const addBookToLibrary = function (title, author, pages, isRead) {
+	newBook = new Book(title, author, pages, isRead);
+	myLibrary.push(newBook);
+	displayBook(newBook);
 };
 
 const removeBook = function (e) {
@@ -57,27 +41,44 @@ const removeBook = function (e) {
 	}
 };
 
-// Create books then add to library
-const addBookToLibrary = function (title, author, pages, isRead) {
-	// Create new book using constructor
-	newBook = new Book(title, author, pages, isRead);
+const toggleReadStatus = function (e) {
+	const target = e.target.closest(".read-status");
 
-	// Add it to library
-	myLibrary.push(newBook);
+	if (target) {
+		// Finding current book in Array.
+		const bookTitle =
+			target.parentElement.parentElement.querySelector(
+				".book-title"
+			).textContent;
+		const bookIndex = myLibrary.findIndex((book) => book.title === bookTitle);
+		const thisBook = myLibrary[bookIndex];
 
-	// Adding book to display
-	displayBook(newBook);
+		// Toggling
+		if (target.querySelector("p").textContent == "READ") {
+			target.parentElement.parentElement.classList.remove("unread");
+			target.parentElement.parentElement.classList.add("read");
+			target.querySelector("p").textContent = "UNREAD";
+			thisBook.isRead = "true";
+		} else if (target.querySelector("p").textContent == "UNREAD") {
+			target.parentElement.parentElement.classList.remove("read");
+			target.parentElement.parentElement.classList.add("unread");
+			target.querySelector("p").textContent = "READ";
+			thisBook.isRead = "false";
+		}
+	}
 };
 
-// Adding book to display
+// Adding book to display (DOM)
 const displayBook = function (Book) {
 	const readClass = Book.isRead == "true" ? "read" : "unread";
 	const buttonContent = Book.isRead == "true" ? "UNREAD" : "READ";
 
+	// Creating new cards
 	const newBook = document.createElement("div");
 	newBook.classList.add("card");
 	newBook.classList.add(`${readClass}`);
 
+	// New cards' contents
 	newBook.innerHTML = `
 	<div class="card-info">
 		<h3 class="book-title">${Book.title}</h3>
@@ -94,9 +95,11 @@ const displayBook = function (Book) {
 	</div>
 	`;
 
+	// Adding cards to DOM
 	readingList.append(newBook);
 };
 
+// Showing pop up, animating addBtn
 const openModal = function (e) {
 	if (!e.target.parentElement.classList.contains("active")) {
 		e.target.parentElement.classList.toggle("active");
@@ -107,6 +110,8 @@ const openModal = function (e) {
 	}
 };
 
+
+// Form -- create new books from submitted form, display it to DOM.
 const submitForm = function (e) {
 	e.preventDefault();
 	const title = bookTitle.value;
