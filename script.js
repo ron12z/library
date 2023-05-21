@@ -1,6 +1,5 @@
 // Initial library
 let myLibrary = [];
-test;
 
 // DOM Elements
 const readingList = document.querySelector(".book-cards-container");
