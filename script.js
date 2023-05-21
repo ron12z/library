@@ -7,12 +7,22 @@ const addBtn = document.querySelector(".addBtn");
 const submitBtn = document.querySelector(".submit");
 const mask = document.querySelector(".mask");
 
-// Book constructor
-function Book(title, author, pages, isRead) {
-	this.title = title;
-	this.author = author;
-	this.pages = `${pages} pages`;
-	this.isRead = isRead;
+// // Book constructor
+// function Book(title, author, pages, isRead) {
+// 	this.title = title;
+// 	this.author = author;
+// 	this.pages = `${pages} pages`;
+// 	this.isRead = isRead;
+// }
+
+// Book class
+class Book {
+	constructor(title, author, pages, isRead) {
+		this.title = title;
+		this.author = author;
+		this.pages = `${pages} pages`;
+		this.isRead = isRead;
+	}
 }
 
 // DOM Methods
