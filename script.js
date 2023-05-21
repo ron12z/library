@@ -1,5 +1,6 @@
 // Initial library
 let myLibrary = [];
+test;
 
 // DOM Elements
 const readingList = document.querySelector(".book-cards-container");
@@ -14,8 +15,6 @@ function Book(title, author, pages, isRead) {
 	this.pages = `${pages} pages`;
 	this.isRead = isRead;
 }
-
-
 
 // DOM Methods
 // Create new book, add to library, display (add to DOM)
@@ -109,7 +108,6 @@ const openModal = function (e) {
 		mask.style.visibility = "hidden";
 	}
 };
-
 
 // Form -- create new books from submitted form, display it to DOM.
 const submitForm = function (e) {
